@@ -70,6 +70,7 @@
 
       //generate HTML based on template
       const generateHTML = templates.menuProduct(thisProduct.data);
+      console.log(thisProduct.data);
       //create element using utils.createElementFromHTML
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
       console.log(thisProduct.element);
@@ -140,10 +141,46 @@
     processOrder(){
       const thisProduct = this;
       console.log('thisProduct in processOrder: ', thisProduct);
+      /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      console.log(formData);
+      /* set variable price to equal thisProduct.data.price */
+      let price = thisProduct.data.price;
+      console.log(price);
+      /* START LOOP: for each paramId in thisProduct.data.params */
+      for(let paramId in thisProduct.data.params){
+        console.log(paramId);
+        /* save the element in thisProduct.data.params with key paramId as const param */
+        const param = thisProduct.data.params;
+        console.log(param);
+        /* START LOOP: for each optionId in param.options */
+        for(let optionId in param.options){
+          console.log(optionId);
+        /* save the element in param.options with key optionId as const option */
+          const option= param.options;
+          console.log(option);
+          /* START IF: if option is selected and option is not default */
+
+        /* add price of option to variable price */
+
+          /* END IF: if option is selected and option is not default */
+
+          /* START ELSE IF: if option is not selected and option is default */
+
+        /* deduct price of option from price */
+          //}
+          /* END ELSE IF: if option is not selected and option is default */
+        // }
+        /* END LOOP: for each optionId in param.options */
+        }
+        /* END LOOP: for each paramId in thisProduct.data.params */
+      }
+      /* set the contents of thisProduct.priceElem to be the value of variable price */
     }
+
   }
+
+  
 
   const app = {
     initMenu: function(){
