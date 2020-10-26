@@ -58,6 +58,7 @@
       thisProduct.id = id;
       console.log(thisProduct.id);
       thisProduct.data = data;
+      console.log(thisProduct.data);
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
@@ -151,26 +152,34 @@
       for(let paramId in thisProduct.data.params){
         console.log(paramId);
         /* save the element in thisProduct.data.params with key paramId as const param */
-        const param = thisProduct.data.params;
+        const param = thisProduct.data.params[paramId];
         console.log(param);
         /* START LOOP: for each optionId in param.options */
         for(let optionId in param.options){
           console.log(optionId);
-        /* save the element in param.options with key optionId as const option */
-          const option= param.options;
+          /* save the element in param.options with key optionId as const option */
+          const option = param.options[optionId];
           console.log(option);
+          //check if formData[paramId] exists and if yes check if its value equals optionId
+          const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          console.log(optionSelected);
           /* START IF: if option is selected and option is not default */
-
-        /* add price of option to variable price */
-
+          if(optionSelected && !option.default){
+          /* add price of option to variable price */
+          const optionPrice = option.price;
+          //console.log(optionPrice);
+          console.log(price += optionPrice);
+         return price += optionPrice;
+         
+          
           /* END IF: if option is selected and option is not default */
-
+          }  
           /* START ELSE IF: if option is not selected and option is default */
 
         /* deduct price of option from price */
-          //}
+         // }
           /* END ELSE IF: if option is not selected and option is default */
-        // }
+        
         /* END LOOP: for each optionId in param.options */
         }
         /* END LOOP: for each paramId in thisProduct.data.params */
