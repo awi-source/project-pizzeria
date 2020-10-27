@@ -90,6 +90,8 @@
       //console.log(thisProduct.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
+      console.log(thisProduct.imageWrapper);
     }
     initAccordion(){
       const thisProduct = this;
@@ -106,6 +108,7 @@
         /* find all active products */
         //const activeProducts = document.querySelectorAll('.product.active');
         const activeProducts = document.querySelectorAll('#product-list > .product.active');
+        console.log(activeProducts);
         /* START LOOP: for each active product */
         for(let activeProduct of activeProducts){
           /* START: if the active product isn't the element of thisProduct */
@@ -151,13 +154,13 @@
       // console.log(price);
       /* START LOOP: for each paramId in thisProduct.data.params */
       for(let paramId in thisProduct.data.params){
-        // console.log(paramId);
+        //console.log(paramId);
         /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
         //console.log(param);
         /* START LOOP: for each optionId in param.options */
         for(let optionId in param.options){
-          //console.log(optionId);
+          // console.log(optionId);
           /* save the element in param.options with key optionId as const option */
           const option = param.options[optionId];
           // console.log(option);
@@ -166,6 +169,7 @@
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
           //console.log(optionSelected);
           /* START IF: if option is selected and option is not default */
+          //console.log(thisProduct.imageWrapper.getAttribute('paramId'));
           if(optionSelected && !option.default){
           /* add price of option to variable price */
             const addOptionPrice = option.price;
@@ -180,11 +184,26 @@
             price = price - subtractOptionPrice;
             console.log(subtractOptionPrice);
             console.log(price);
+            
             /* END ELSE IF: if option is not selected and option is default */          
           }
-          /* END LOOP: for each optionId in param.options */
-    
+          if(optionSelected === true){  
+            const chosenImages = thisProduct.imageWrapper.querySelectorAll(`.${paramId}-${optionId}`);
+            console.log(chosenImages);
+            for(let chosenImage of chosenImages){
+              console.log(chosenImage);
+              chosenImage.classList.add('active');
+            }          
+          } else {
+            const chosenImages = thisProduct.imageWrapper.querySelectorAll(`.${paramId}-${optionId}`);
+            for(let chosenImage of chosenImages){
+              chosenImage.classList.remove('active');
+            }
+          }
+        
+          /* END LOOP: for each optionId in param.options */   
         }
+      
         /* END LOOP: for each paramId in thisProduct.data.params */
       }
       /* set the contents of thisProduct.priceElem to be the value of variable price */
