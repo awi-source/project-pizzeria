@@ -56,30 +56,24 @@
     constructor(id, data){
       const thisProduct = this;
       thisProduct.id = id;
-      //console.log(thisProduct.id);
       thisProduct.data = data;
-      //console.log(thisProduct.data);
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      console.log('new Product: ', thisProduct);
-      
     }
     renderInMenu(){
       const thisProduct = this;
 
-      //generate HTML based on template
+      
       const generateHTML = templates.menuProduct(thisProduct.data);
-      //console.log(thisProduct.data);
-      //create element using utils.createElementFromHTML
+  
       thisProduct.element = utils.createDOMFromHTML(generateHTML);
-      //console.log(thisProduct.element);
-      //find menu container
+
       const menuContainer = document.querySelector(select.containerOf.menu);
-      //add element to menu
+  
       menuContainer.appendChild(thisProduct.element);
     }
     getElements(){
@@ -87,48 +81,28 @@
     
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-      //console.log(thisProduct.form);
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      //console.log(thisProduct.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
-      //console.log(thisProduct.imageWrapper);
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
-      console.log(thisProduct.amountWidgetElem);
     }
     initAccordion(){
       const thisProduct = this;
-      /* find the clickable trigger (the element that should react to clicking) */
-      // const clickableTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       const clickableTrigger = thisProduct.accordionTrigger;
-      //console.log(clickableTrigger);
-      /* START: click event listener to trigger */
       clickableTrigger.addEventListener('click', function(event){
-      /* prevent default action for event */
         event.preventDefault();
-        /* toggle active class on element of thisProduct */
         thisProduct.element.classList.toggle('active');
-        /* find all active products */
-        //const activeProducts = document.querySelectorAll('.product.active');
         const activeProducts = document.querySelectorAll('#product-list > .product.active');
-        //console.log(activeProducts);
-        /* START LOOP: for each active product */
         for(let activeProduct of activeProducts){
-          /* START: if the active product isn't the element of thisProduct */
           if(activeProduct !== thisProduct.element){
-            /* remove class active for the active product */
             activeProduct.classList.remove('active');
-            /* END: if the active product isn't the element of thisProduct */
           }
-          /* END LOOP: for each active product */
         }
-        /* END: click event listener to trigger */
       });
     }
     initOrderForm(){
       const thisProduct = this;
-      //console.log('thisProduct in initOrderForm: ', thisProduct);
 
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -149,53 +123,35 @@
     }
     processOrder(){
       const thisProduct = this;
-      //console.log('thisProduct in processOrder: ', thisProduct);
-      /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
+
       const formData = utils.serializeFormToObject(thisProduct.form);
-      //console.log(formData);
-      /* set variable price to equal thisProduct.data.price */
+
       let price = thisProduct.data.price;
-      // console.log(price);
-      /* START LOOP: for each paramId in thisProduct.data.params */
+
       for(let paramId in thisProduct.data.params){
-        //console.log(paramId);
-        /* save the element in thisProduct.data.params with key paramId as const param */
+  
         const param = thisProduct.data.params[paramId];
-        //console.log(param);
-        /* START LOOP: for each optionId in param.options */
+
         for(let optionId in param.options){
-          // console.log(optionId);
-          /* save the element in param.options with key optionId as const option */
+   
           const option = param.options[optionId];
-          // console.log(option);
-          //console.log('dla ' + paramId + ' są nastęujące opcje: ' + optionId);
-          //check if formData[paramId] exists and if yes check if its value equals optionId
+
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-          //console.log(optionSelected);
-          /* START IF: if option is selected and option is not default */
-          //console.log(thisProduct.imageWrapper.getAttribute('paramId'));
+   
           if(optionSelected && !option.default){
-          /* add price of option to variable price */
             const addOptionPrice = option.price;
             price = price + addOptionPrice;
-            //console.log(addOptionPrice);
-            //console.log(price);
-            /* END IF: if option is selected and option is not default */
+
           }else if(!optionSelected && option.default){
-          /* START ELSE IF: if option is not selected and option is default */         
-            /* deduct price of option from price */
+
             const subtractOptionPrice = option.price;
             price = price - subtractOptionPrice;
-            //console.log(subtractOptionPrice);
-            //console.log(price);
-            
-            /* END ELSE IF: if option is not selected and option is default */          
+          
           }
           if(optionSelected === true){  
             const chosenImages = thisProduct.imageWrapper.querySelectorAll(`.${paramId}-${optionId}`);
-            //console.log(chosenImages);
+
             for(let chosenImage of chosenImages){
-              //console.log(chosenImage);
               chosenImage.classList.add('active');
             }          
           } else {
@@ -203,14 +159,10 @@
             for(let chosenImage of chosenImages){
               chosenImage.classList.remove('active');
             }
-          }
-        
-          /* END LOOP: for each optionId in param.options */   
+          } 
         }
-      
-        /* END LOOP: for each paramId in thisProduct.data.params */
       }
-      /* set the contents of thisProduct.priceElem to be the value of variable price */
+     
       price *= thisProduct.amountWidget.value;
       thisProduct.priceElem.innerHTML = price;
     }
@@ -245,8 +197,6 @@
       const thisWidget = this;
 
       const newValue = parseInt(value);
-
-      /*TODO: Add validation*/
 
       if(newValue!==thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
         thisWidget.value = newValue;
