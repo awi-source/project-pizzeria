@@ -1,3 +1,4 @@
+  
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
@@ -54,6 +55,7 @@
   // CODE ADDED END
   };
 
+  // eslint-disable-next-line no-unused-vars
   const classNames = {
     menuProduct: {
       wrapperActive: 'active',
@@ -216,8 +218,8 @@
       thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
       thisWidget.initActions();
-      console.log('AmountWidget: ', thisWidget);
-      console.log('constructor arguments: ', element);
+      // console.log('AmountWidget: ', thisWidget);
+    //  console.log('constructor arguments: ', element);
     }
     getElements(element){
       const thisWidget = this;
@@ -263,11 +265,36 @@
       thisWidget.element.dispatchEvent(event);
     }
   }
+  class Cart {
+    constructor(element){
+      const thisCart = this;
+
+      thisCart.products = [];
+
+      thisCart.getElements(element);
+      thisCart.initActions();
+      console.log('new Cart ', thisCart);
+    }
+    getElements(element){
+      const thisCart = this;
+
+      thisCart.dom = {};
+
+      thisCart.dom.wrapper = element;
+      thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector('.cart__summary');
+    }
+    initActions(){
+      const thisCart = this;
+      thisCart.dom.toggleTrigger.addEventListener('click', function(){
+        thisCart.dom.wrapper.classList.toggle('active');
+      });
+    }
+  }
   const app = {
     initMenu: function(){
       const thisApp = this;
 
-      console.log('thisApp.data: ', thisApp.data);
+      //console.log('thisApp.data: ', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       }
@@ -279,13 +306,20 @@
     },
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
       thisApp.initData();
       this.initMenu();
+      thisApp.initCart();
+    },
+    initCart: function(){
+      const thisApp = this;
+
+      const cartElem = document.querySelector(select.containerOf.cart);
+      thisApp.cart = new Cart(cartElem);
     },
   };
   
