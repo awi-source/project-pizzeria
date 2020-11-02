@@ -110,6 +110,7 @@
       console.log(thisProduct.element);
 
       const menuContainer = document.querySelector(select.containerOf.menu);
+      console.log(menuContainer);
   
       menuContainer.appendChild(thisProduct.element);
     }
@@ -189,7 +190,6 @@
           }
           if(optionSelected === true){  
             const chosenImages = thisProduct.imageWrapper.querySelectorAll(`.${paramId}-${optionId}`);
-
             if(!thisProduct.params[paramId]){
               thisProduct.params[paramId] = {
                 label: param.label,
@@ -312,7 +312,8 @@
 
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector('.cart__summary');
-      thisCart.dom.productList = thisCart.dom;
+      thisCart.dom.productList = thisCart.dom;//check this
+      console.log(thisCart.dom.productList);
     }
     initActions(){
       const thisCart = this;
@@ -325,9 +326,11 @@
       console.log('adding product ', menuProduct);
       const generatedHTML = templates.cartProduct(menuProduct);
       console.log(generatedHTML);
-      thisCart.element  = utils.createDOMFromHTML(generatedHTML);
-      const generatedDOM = document.querySelector(select.containerOf.cart);
-     
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      console.log(generatedDOM);
+      const cartContainer = thisCart.dom.wrapper.querySelector('.cart__order-summary');
+      console.log(cartContainer);
+      cartContainer.appendChild(generatedDOM);
     }
   }
   const app = {
