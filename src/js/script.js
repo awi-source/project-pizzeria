@@ -293,6 +293,7 @@
 
       const event = new Event('updated');
       thisWidget.element.dispatchEvent(event);
+      console.log(event);
     }
   }
   class Cart {
@@ -347,13 +348,8 @@
       thisCartProduct.id = menuProduct.id;
       thisCartProduct.name = menuProduct.name;
       thisCartProduct.price = menuProduct.price;
-      console.log(thisCartProduct.price); 
-      // thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amountWidget.value;
-      // console.log(thisCartProduct.price); //NaN
       thisCartProduct.priceSingle = menuProduct.priceSingle;
-      // thisCartProduct.amount = thisCartProduct.amountWidget.value;
-      console.log(thisCartProduct.amount); 
-      console.log(thisCartProduct.amount); //undefined
+      thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
 
       thisCartProduct.getElements(element);
@@ -369,19 +365,21 @@
 
       thisCartProduct.dom.wrapper = element;
       thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
-      
+      console.log(thisCartProduct.dom.amountWidget);
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
-      
     }
     initAmountWidget(){
       const thisCartProduct = this;
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
       console.log('new AmountWidget: ', thisCartProduct.amountWidget);
       thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
+        thisCartProduct.amount = thisCartProduct.amountWidget.value;
+        console.log(thisCartProduct.amount);
+        thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
+        console.log(thisCartProduct.price);
         thisCartProduct.dom.price.innerHTML =  thisCartProduct.price;
-        // console.log(thisCartProduct.amountWidget.value);
       });
       
     }
