@@ -300,6 +300,7 @@
 
       thisCart.products = [];
       console.log(thisCart.products);
+      
       thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
      
 
@@ -361,6 +362,12 @@
         thisCart.subtotalPrice += product.price;
         thisCart.totalNumber += product.amount;
         
+      }
+      
+      if(thisCart.products.length !== 0){
+        thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      } else if(thisCart.products.length === 0){
+        thisCart.deliveryFee = 0;
       }
       thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
 
