@@ -336,9 +336,11 @@
       thisCart.dom.form = element.querySelector(select.cart.form);
       console.log(thisCart.dom.form);
     
-      thisCart.phone = thisCart.dom.form.phone.value;
+  
+  
+      thisCart.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
       console.log(thisCart.phone);
-      thisCart.address = thisCart.dom.form.address.value;
+      thisCart.address = thisCart.dom.wrapper.querySelector(select.cart.address);
       console.log(thisCart.address);
     }
     initActions(){
@@ -414,10 +416,8 @@
       const url = settings.db.url + '/' + settings.db.order;
 
       const payload = {
-        // address: select.cart.address,
-        // phone: select.cart.address,
-        address: thisCart.address,
-        phone: thisCart.phone,
+        address: thisCart.address.value,
+        phone: thisCart.phone.value,
         totalPrice: thisCart.totalPrice,
         totalNumber: thisCart.totalNumber,
         subtotalPrice: thisCart.subtotalPrice,
