@@ -8,22 +8,17 @@ class Cart {
     const thisCart = this;
 
     thisCart.products = [];
-    console.log(thisCart.products);
       
     thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
      
 
     thisCart.getElements(element);
     thisCart.initActions();
-      
-    console.log('thisCart: ', thisCart);
   }
   getElements(element){
     const thisCart = this;
-    console.log(this);
 
     thisCart.dom = {};
-    console.log(thisCart.dom);
 
     thisCart.dom.wrapper = element;
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
@@ -36,14 +31,10 @@ class Cart {
       thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
     }
     thisCart.dom.form = element.querySelector(select.cart.form);
-    console.log(thisCart.dom.form);
-    
-  
-  
+
+
     thisCart.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
-    console.log(thisCart.phone);
     thisCart.address = thisCart.dom.wrapper.querySelector(select.cart.address);
-    console.log(thisCart.address);
   }
   initActions(){
     const thisCart = this;
@@ -87,11 +78,6 @@ class Cart {
     }
     thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
 
-    console.log('totalNumber: ', thisCart.totalNumber);
-    console.log('subtotalPrice: ', thisCart.subtotalPrice);
-    console.log('totalPrice: ', thisCart.totalPrice);
-    console.log(thisCart.products);
-    console.log(thisCart.dom);
     for(let key of thisCart.renderTotalsKeys){
       for(let elem of thisCart.dom[key]){
         elem.innerHTML = thisCart[key];
