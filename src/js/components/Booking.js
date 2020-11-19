@@ -19,8 +19,7 @@ class Booking {
     wrapper.innerHTML = generateHTML;
     
     thisBooking.dom.peopleAmount = wrapper.querySelector(select.booking.peopleAmount);
-    console.log(thisBooking.dom.peopleAmount);
-    console.log(thisBooking.dom);
+  
 
     thisBooking.dom.hoursAmount = wrapper.querySelector(select.booking.hoursAmount);
 
