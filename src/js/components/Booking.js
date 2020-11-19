@@ -2,27 +2,27 @@ import {templates, select} from '../settings.js';
 import AmountWidget from './AmountWidget.js';
 
 class Booking {
-  constructor(){
+  constructor(wrapper){
     const thisBooking = this;
 
-    thisBooking.render();
+    thisBooking.render(wrapper);
     thisBooking.initWidgets(); 
 
+    thisBooking.dom.wrapper = wrapper;
   }
-  render(){
+  render(wrapper){
     const thisBooking = this;
 
     const generateHTML = templates.bookingWidget();
     thisBooking.dom = {};
-    thisBooking.dom.wrapper = document.querySelector(select.containerOf.booking);
-    console.log(thisBooking.dom.wrapper);
-    thisBooking.dom.wrapper.innerHTML = generateHTML;
+ 
+    wrapper.innerHTML = generateHTML;
     
-    thisBooking.dom.peopleAmount = thisBooking.dom.wrapper.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.peopleAmount = wrapper.querySelector(select.booking.peopleAmount);
     console.log(thisBooking.dom.peopleAmount);
     console.log(thisBooking.dom);
 
-    thisBooking.dom.hoursAmount = thisBooking.dom.wrapper.querySelector(select.booking.hoursAmount);
+    thisBooking.dom.hoursAmount = wrapper.querySelector(select.booking.hoursAmount);
 
   }
   initWidgets(){
