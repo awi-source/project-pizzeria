@@ -40,6 +40,7 @@ class BaseWidget{
   renderValue(){
     const thisWidget = this;
     thisWidget.dom.wrapper.innerHTML = thisWidget.value;
+    console.log(thisWidget.value);
   }
 
   setValue(value){

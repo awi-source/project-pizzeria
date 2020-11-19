@@ -22,7 +22,7 @@
         "build-dev:sass": "node-sass --output-style expanded --source-map true -o dist/css src/sass",
         "server": "json-server --port 3131 --no-cors --delay 250 --watch dist/db/app.json",
         "watch": "npm-run-all build build-dev -p watch:* server",
-        "watch:browsersync": "browser-sync start --server dist --files \"dist/**/*\" --ignore \"dist/db/**/*\"",        
+        "watch:browsersync": "browser-sync start --server dist --files \"dist/**/*\" --ignore \"dist/db/**/*\"",
         "watch:sassprefixer": "onchange \"src/sass/**/*.scss\" -- npm run build-dev",
         "watch:copy": "onchange -e \"**/sass/**/*\" -e \"**/.gitkeep\" \"src/**/*\" -- copyfiles -a -u 1 {{changed}} dist"
     },
@@ -37,6 +37,7 @@
         "browser-sync": "^2.26.3",
         "copyfiles": "^2.1.0",
         "eslint": "^5.14.1",
+        "flatpickr": "^4.6.6",
         "globstar": "^1.0.0",
         "mkdirp": "^0.5.1",
         "node-sass": "^4.11.0",
