@@ -3,7 +3,6 @@ class BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom = {};
-    // console.log(thisWidget.dom);
     thisWidget.dom.wrapper = wrapperElement;
     thisWidget.correctValue = initialValue;
   }
@@ -40,7 +39,6 @@ class BaseWidget{
   renderValue(){
     const thisWidget = this;
     thisWidget.dom.wrapper.innerHTML = thisWidget.value;
-    console.log(thisWidget.value);
   }
 
   setValue(value){
