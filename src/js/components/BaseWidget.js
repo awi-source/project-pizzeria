@@ -3,14 +3,15 @@ class BaseWidget{
     const thisWidget = this;
 
     thisWidget.dom = {};
+    // console.log(thisWidget.dom);
     thisWidget.dom.wrapper = wrapperElement;
     thisWidget.correctValue = initialValue;
-    console.log(initialValue);
+    // console.log(initialValue);
   }
 
   get value(){
     const thisWidget = this;
-    console.log(thisWidget.correctValue);
+    // console.log(thisWidget.correctValue);
     return thisWidget.correctValue;
 
   }
@@ -47,7 +48,7 @@ class BaseWidget{
   setValue(value){
     const thisWidget = this;
     thisWidget.value = value;
-    console.log(value);
+    // console.log(value);
   }
 
   announce(){
