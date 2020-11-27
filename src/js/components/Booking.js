@@ -11,6 +11,7 @@ class Booking {
     thisBooking.render(wrapper);
     thisBooking.initWidgets(); 
     thisBooking.getData();
+    thisBooking.tableBooked();
 
     // thisBooking.dom.wrapper = wrapper;
   }
@@ -26,7 +27,7 @@ class Booking {
         startDateParam, 
         endDateParam,
       ],
-      eventsCurent: [
+      eventsCurrent: [
         settings.db.notRepeatParam,
         startDateParam, 
         endDateParam, 
@@ -42,8 +43,8 @@ class Booking {
     const urls = {
       booking:      settings.db.url + '/' + settings.db.booking 
                                     + '?' + params.booking.join('&'),
-      eventsCurent: settings.db.url + '/' + settings.db.event + '?' 
-                                    + params.eventsCurent.join('&'),
+      eventsCurrent: settings.db.url + '/' + settings.db.event + '?' 
+                                    + params.eventsCurrent.join('&'),
       eventsRepeat: settings.db.url + '/' + settings.db.event + '?' 
                                     + params.eventsRepeat.join('&'),
     };
@@ -51,32 +52,34 @@ class Booking {
     
     Promise.all([
       fetch(urls.booking),
-      fetch(urls.eventsCurent),
+      fetch(urls.eventsCurrent),
       fetch(urls.eventsRepeat),
     ])
       .then(function(allResponses){
         const bookingResponse = allResponses[0];
-        const eventsCurentResponse = allResponses[1];
+        const eventsCurrentResponse = allResponses[1];
         const eventsRepeatResponse = allResponses[2];
         return Promise.all([
           bookingResponse.json(),
-          eventsCurentResponse.json(),
+          eventsCurrentResponse.json(),
           eventsRepeatResponse.json()
         ]);
       })
-      .then(function([bookings, eventsCurent, eventsRepeat]){
+      .then(function([bookings, eventsCurrent, eventsRepeat]){
         // console.log(bookings);
-        // console.log(eventsCurent);
+        // console.log(eventsCurrent);
         // console.log(eventsRepeat);
-        thisBooking.parseData(bookings, eventsCurent, eventsRepeat);
+        thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
 
-  parseData(bookings, eventsCurent, eventsRepeat){
+  parseData(bookings, eventsCurrent, eventsRepeat){
     const thisBooking = this;
     thisBooking.booked = {};
+    console.log('------');
+    console.log(thisBooking.booked);
 
-    for(let item of eventsCurent){
+    for(let item of eventsCurrent){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
 
@@ -105,6 +108,7 @@ class Booking {
     const thisBooking = this;
     if(typeof thisBooking.booked[date] === 'undefined'){
       thisBooking.booked[date] = {};
+      // console.log(thisBooking.booked[date]);
     }
 
     const startHour = utils.hourToNumber(hour);
@@ -115,10 +119,10 @@ class Booking {
       if(typeof thisBooking.booked[date][hourBlock] === 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
       }
-  
       thisBooking.booked[date][hourBlock].push(table);
     }
-  }
+        
+  }  
 
   updateDOM(){
     const thisBooking = this;
@@ -133,13 +137,14 @@ class Booking {
       ||
       typeof thisBooking.booked[thisBooking.date][thisBooking.hour] === 'undefined'
     ){
+      console.log(thisBooking.booked[thisBooking.date]);
       allAvailable = true;
     }
-
     for(let table of thisBooking.dom.tables){
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
+        console.log(table);
       }
       if(
         !allAvailable
@@ -150,8 +155,35 @@ class Booking {
       } else {
         table.classList.remove(classNames.booking.tableBooked);
       }
+      //new code:
+   
+      // if(!table.classList.contains(classNames.booking.tableBooked)){
+      //   table.addEventListener('click', function(){
+      //     console.log(`----> You have booked table ${tableId}`);
+      //     table.classList.add(classNames.booking.tableBooked);
+      //   });
+      // }
     }
   }
+  //new code:
+  tableBooked(){
+    const thisBooking = this;
+    for(let table of thisBooking.dom.tables){
+      if(!table.classList.contains(classNames.booking.tableBooked)){
+        table.addEventListener('click', function(){
+          let tableId = table.getAttribute(settings.booking.tableIdAttribute);
+          console.log(`----> You have booked table ${tableId}`);
+          table.classList.add(classNames.booking.tableBooked);
+          console.log(thisBooking.booked);
+
+
+          thisBooking.sendBooking();
+        });
+      }
+    }
+  }
+  
+
 
   render(wrapper){
     const thisBooking = this;
@@ -182,13 +214,50 @@ class Booking {
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
 
-    console.log(thisBooking.wrapper);
-    
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
     });
    
   }
+  //new code
+  sendBooking(){
+    const thisBooking = this;
+    const url = settings.db.url + '/' + settings.db.booking;
+
+    const payload = {
+      date: thisBooking.datePicker.value,
+      hour: utils.numberToHour(thisBooking.booked[thisBooking.date][thisBooking.hour]),
+      table: thisBooking.tableId,
+      repeat: false,
+      duration: thisBooking.duration,
+      // ppl:  thisBooking.dom.peopleAmount.input.value, 
+      starters: [],
+    };
+    console.log(payload);
+
+    // for(let product of thisCart.products){
+    //   product.getData();
+    //   payload.products.push(product.getData());
+    //   console.log(product.getData());
+    // }
+      
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+    fetch(url, options)
+      .then(function(response){
+        return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsedResponse ', parsedResponse);
+      });
+  }
 }
+
+
 
 export default Booking;
