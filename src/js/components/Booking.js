@@ -112,10 +112,10 @@ class Booking {
       // console.log(thisBooking.booked[date]);
     }
 
-    const hourPicker = utils.hourToNumber(hour);
+    const startHour = utils.hourToNumber(hour);
    
 
-    for(let hourBlock = hourPicker; hourBlock < hourPicker + duration; hourBlock += 0.5){
+    for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock += 0.5){
       // console.log('loop', hourBlock);
       if(typeof thisBooking.booked[date][hourBlock] === 'undefined'){
         thisBooking.booked[date][hourBlock] = [];
