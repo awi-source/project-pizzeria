@@ -39,7 +39,7 @@ class Booking {
       ],
     };
 
-    console.log('getData params', params);
+    // console.log('getData params', params);
 
     const urls = {
       booking:      settings.db.url + '/' + settings.db.booking
@@ -49,7 +49,7 @@ class Booking {
       eventsRepeat: settings.db.url + '/' + settings.db.event + '?'
                                     + params.eventsRepeat.join('&'),
     };
-    console.log('getData urls', urls);
+    // console.log('getData urls', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -77,8 +77,8 @@ class Booking {
   parseData(bookings, eventsCurrent, eventsRepeat){
     const thisBooking = this;
     thisBooking.booked = {};
-    console.log('------');
-    console.log(thisBooking.booked);
+    // console.log('------');
+    // console.log(thisBooking.booked);
 
     for(let item of eventsCurrent){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -86,6 +86,7 @@ class Booking {
 
     for(let item of bookings){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
+      // console.log(thisBooking.makeBooked(item.date, item.hour, item.duration, item.table));
     }
 
     const minDate = thisBooking.datePicker.minDate;
@@ -107,9 +108,9 @@ class Booking {
 
   onFormSubmitHandler(){
     const thisBooking = this;
-    console.log(this);
+    // console.log(this);
     const submitForm = thisBooking.dom.wrapper.querySelector('.booking-form');
-    console.log(submitForm);
+    // console.log(submitForm);
     submitForm.addEventListener('submit', function(e){
       e.preventDefault();
       // console.log('check this out');
@@ -210,10 +211,10 @@ class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
 
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
-    console.log(wrapper);
+    // console.log(wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     // thisBooking.dom.tables = thisBooking.wrapper.querySelectorAll(select.booking.tables);
-    console.log(thisBooking.dom.tables);
+    // console.log(thisBooking.dom.tables);
   }
   initWidgets(){
     const thisBooking = this;
@@ -233,12 +234,13 @@ class Booking {
     const url = settings.db.url + '/' + settings.db.booking;
    
 
-    console.log(thisBooking.hourPicker);
+    // console.log(thisBooking.hourPicker);
 
+    
     const payload = {
       date: thisBooking.datePicker.value,
       hour:thisBooking.hourPicker.value,
-      // table: tableId,
+      // table: thisBooking.tables.tableId,
       repeat: false,
       duration: thisBooking.hoursAmount.value,
       ppl:  thisBooking.peopleAmount.value, 
