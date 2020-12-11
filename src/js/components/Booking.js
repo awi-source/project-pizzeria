@@ -82,7 +82,7 @@ class Booking {
       bread: false
     };
     const starterInputs = document.querySelectorAll('input[name="starter"]');
-    console.log(starterInputs);
+    // console.log(starterInputs);
     for (let starterInput of starterInputs) {
       starterInput.addEventListener('click', function (evt) {
         thisBooking.starters[evt.target.getAttribute('value')] = evt.target.checked;
@@ -91,13 +91,24 @@ class Booking {
     }
   }
   
-
-
+  // starterSupport(){
+  //   const thisBooking = this;
+  //   thisBooking.starters = [];
+  //   const starterInputs = document.querySelectorAll('input[name="starter"]');
+  //   for(let starterInput of starterInputs){
+  //     starterInput.addEventListener('click', function(){
+  //       let chosenStarter = starterInput;
+  //       console.log(chosenStarter);
+  //       thisBooking.starters.push(chosenStarter.value);
+  //     });
+  //   }
+  // }
+  
   parseData(bookings, eventsCurrent, eventsRepeat){
     const thisBooking = this;
     thisBooking.booked = {};
     // console.log('------');
-    console.log(thisBooking.booked);
+    // console.log(thisBooking.booked);
 
     for(let item of eventsCurrent){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -175,7 +186,7 @@ class Booking {
       let tableId = table.getAttribute(settings.booking.tableIdAttribute);
       if(!isNaN(tableId)){
         tableId = parseInt(tableId);
-        console.log(table);
+        // console.log(table);
       }
       if(
         !allAvailable
@@ -186,17 +197,10 @@ class Booking {
       } else {
         table.classList.remove(classNames.booking.tableBooked);
       }
-      //new code:
-
-      // if(!table.classList.contains(classNames.booking.bookTable)){
-      //   table.addEventListener('click', function(){
-      //     console.log(`----> You have booked table ${tableId}`);
-      //     table.classList.add(classNames.booking.bookTable);
-      //   });
-      // }
+  
     }
   }
-  //new code:
+
   bookTable(){
     const thisBooking = this;
     for(let table of thisBooking.dom.tables){
