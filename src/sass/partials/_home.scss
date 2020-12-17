@@ -1,0 +1,147 @@
+$font-main: "Oswald", sans-serif;
+
+.home-container {
+  position: relative;
+  max-width: 700px;
+  height: 1100px;
+  margin: 42px auto;
+  padding: 0 20px;
+  background-color: white;
+}
+
+.row{
+  display: flex;
+}
+
+.box{
+  flex: 1;
+}
+
+.box img{
+  margin-top: 30px;
+  width: 300px;
+  height: 130px;
+  padding: 5px;
+  object-fit: cover;
+  // border: 1px solid blue;
+}
+
+.box-order{
+  position: absolute;
+  left: 10px;
+}
+
+.box-booking{
+  position: absolute;
+  right: 10px;
+} 
+
+figure{
+  position: relative;
+}
+
+figcaption{
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: $font-main;
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.box-hours{
+  position: absolute;
+  width: 591px;
+  height: 130px;
+  background-color: $color-main;
+  top: 176px;
+  left: 54px;
+}
+
+.caption-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: white;
+  font-family: $font-main;
+  font-size: 22px;
+  text-transform: uppercase;
+  line-height: 0.3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  // border: 1px solid blue;
+}
+
+p:last-child{
+  font-size: 14px;
+}
+
+.carousel-wrapper{
+  position: relative;
+  top: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-img{
+  width: 50px;
+  height: 50px;
+}
+
+.carousel-img img{
+  position: relative;
+  left: 36px;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.main-carousel{
+  position: relative;
+  left: 200px;
+  top: -50px;
+  width: 75%;
+}
+
+.carousel-cell {
+  width: 90%; 
+  height: 180px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.flickity-prev-next-button{
+  display: none;
+}
+.gallery-wrapper{
+  position: absolute;
+  top: 580px;
+  left: 54px;
+  width: 591px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.gallery-item{
+  flex: 33.3333%;
+  margin: 0;
+  // height: 100px;
+  // width: 100px;
+}
+.gallery-item img{
+  object-fit: cover;
+  margin: 0;
+  height: 190px;
+  width: 190px;
+}
+footer{
+  position: absolute;
+  bottom: 20px;
+  } a{
+  color: $color-main;
+  }
