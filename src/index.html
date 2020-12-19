@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
   <link rel="stylesheet" href="./vendor/range-slider.min.css">
+  <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -65,38 +66,41 @@
 
   <div id="pages">
     
-    <div class="home-wrapper">
+    <section id="home" class="home-wrapper">
       <div class="home-container">
-        <section>
           <div class="row">
             <div class="box box-order">
-            <figure>
+            <a href="#order">
+              <figure>
               <img src="https://i.postimg.cc/jjjbnXYq/pizza-1.jpg">
               <figcaption>order online</figcaption>
-            </figure>
+              <p class="description">Delicious food delivered to your door</p>
+              </figure>
+            </a>
             </div>
             <div class="box box-booking">
-            <figure>
-            <img src="https://i.postimg.cc/GhtQSgnn/pizza-2.jpg">
-            <figcaption>book a table</figcaption>
-            </figure>
+            <a href="#booking">
+              <figure>
+              <img src="https://i.postimg.cc/GhtQSgnn/pizza-2.jpg">
+              <figcaption>book a table</figcaption>
+              <p class="description">Visit us and enjoy our family atmosphere</p>
+              </figure>
+            </a>
             </div>
           </div>
-        </section>
-        <section>
+        
           <div class="box-hours">
           <div class="caption-wrapper">
             <p>opening hours:</p>
             <p>tue-sun, 12pm-12am</p>
           </div>    
           </div>
-        </section>
-        <section>
+        
           <div class="carousel-wrapper">
             <div class="carousel-img">
               <img src="https://i.postimg.cc/3xjSyMPz/pizza-3.jpg">
             </div>
-            <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
+            <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": true}'>
               <div class="carousel-cell">
                 <blockquote>
                   <p>Amazing service!</p>
@@ -118,35 +122,39 @@
         </div>
             </div>  
           </div>
-        </section>
-        <section>
+       
           <div class="gallery-wrapper">
             <figure class="gallery-item">
               <img src="https://i.postimg.cc/nhW8cYJ5/pizza-4.jpg">
+              <i class="fas fa-pizza-slice"></i>
             </figure>
             <figure class="gallery-item">
               <img src="https://i.postimg.cc/8ck489j6/pizza-5.jpg">
+              <i class="fas fa-pizza-slice"></i>
             </figure>
             <figure class="gallery-item">
-              <img src="https://i.postimg.cc/mk6Qvrvv/pizza-6.jpg">      
+              <img src="https://i.postimg.cc/mk6Qvrvv/pizza-6.jpg">  
+              <i class="fas fa-pizza-slice"></i>    
             </figure>         
             <figure class="gallery-item">
-              <img src="https://i.postimg.cc/XY684rGW/pizza-7.jpg">      
+              <img src="https://i.postimg.cc/XY684rGW/pizza-7.jpg">  
+              <i class="fas fa-pizza-slice"></i>    
             </figure>
             <figure class="gallery-item">
               <img src="https://i.postimg.cc/YSbf68X2/pizza-8.jpg">   
+              <i class="fas fa-pizza-slice"></i>
             </figure>
             <figure class="gallery-item">
               <img src="https://i.postimg.cc/dQ7p0T1Z/pizza-9.jpg">
+              <i class="fas fa-pizza-slice"></i>
             </figure>
-          </div>
-        </section>   
+          </div>   
           <footer>
             <a href="#">View more on Instagram</a>
           </footer>  
       </div>
     
-    </div>
+    </section>
 
 
     <section id="order">
