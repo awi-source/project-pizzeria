@@ -40,7 +40,7 @@ class DatePicker extends BaseWidget {
   }
 
   parseValue(value){
-    console.log(value);
+    // console.log(value);
     return value;
   }
   isValid(){

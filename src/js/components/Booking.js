@@ -14,6 +14,7 @@ class Booking {
     thisBooking.bookTable();
     thisBooking.onFormSubmitHandler();
     thisBooking.starterSupport();
+    thisBooking.showColors();
 
     // thisBooking.dom.wrapper = wrapper;
   }
@@ -108,7 +109,7 @@ class Booking {
     const thisBooking = this;
     thisBooking.booked = {};
     // console.log('------');
-    // console.log(thisBooking.booked);
+    console.log(thisBooking.booked);
 
     for(let item of eventsCurrent){
       thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
@@ -148,6 +149,8 @@ class Booking {
     });
   }
 
+
+  
   makeBooked(date, hour, duration, table){
     const thisBooking = this;
     if(typeof thisBooking.booked[date] === 'undefined'){
@@ -164,8 +167,16 @@ class Booking {
         thisBooking.booked[date][hourBlock] = [];
       }
       thisBooking.booked[date][hourBlock].push(table);
+      // console.log(hourBlock);
+      // console.log(thisBooking.booked[date][hourBlock]);
+      // console.log(thisBooking.booked[date][hourBlock].length);
+     
+    
     }
+   
+   
   }
+ 
 
   updateDOM(){
     const thisBooking = this;
@@ -199,7 +210,69 @@ class Booking {
       }
   
     }
+    
   }
+  // console.log(beforeSliderBackground);
+  // beforeSliderBackground.style.backgroundColor = 'red';
+  // for(let hourBlock of thisBooking.booked[date][hourBlock]){
+  //   const NumberOfTablesBooked = thisBooking.booked[date][hourBlock].length;
+  //   console.log(NumberOfTablesBooked);
+  //   if(NumberOfTablesBooked === 3){
+  //     sliderBackground.style.backgroundColor = 'red';
+  //     beforeSliderBackground.style.backgroundColor = 'red';
+  //   } else if(NumberOfTablesBooked === 2){
+  //     sliderBackground.style.backgroundColor = 'yellow'; 
+  //     beforeSliderBackground.style.backgroundColor = 'yellow';
+  //   } else{
+  //     sliderBackground.style.backgroundColor = 'green'; 
+  //     beforeSliderBackground.style.backgroundColor = 'green';
+  //   }
+
+
+  showColors(){
+    const thisBooking = this;
+    // const sliderBackground = document.querySelector('.rangeSlider');
+    // // const beforeSliderBackground = document.querySelector('.rangeSlider_fill')
+    // // sliderBackground.style.backgroundColor = 'red';
+    // const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
+
+    // sliderBackground.style.background = 'linear-gradient(90deg, green 8.33%, red 8.33% 16.66%, yellow 16.66% 24.99%, green 24.99% 33.32%, red 33.32% 41.65%, green 41.65% 49.98%, yellow 49.98% 58.31%, red 58.31% 64.64%,green 64.64% 74.97%, yellow 74.97% 83.30%, red 83.30% 91.63%, green 91.63%)'; 
+
+    // beforeSliderBackground.style.background = 'transparent';
+
+    thisBooking.hours = [];
+    
+    const date = thisBooking.datePicker.value;
+
+    for(let hourBlock in thisBooking.booked[date]){
+      if(thisBooking.booked[date][hourBlock].length === 3){
+        thisBooking.hours.push(`${hourBlock}: red`);
+      }else if(thisBooking.booked[date][hourBlock].length === 2){
+        thisBooking.hours.push(`${hourBlock}: yellow`);
+      } else{
+        thisBooking.hours.push(`${hourBlock}: green`);
+      }
+    }
+    console.log(thisBooking.hours);
+
+    // const date = thisBooking.datePicker.value;
+    // const NumberOfTablesBooked = thisBooking.booked;
+    // console.log(NumberOfTablesBooked);
+    // for(let hourBlock of thisBooking.booked[date][hourBlock]){
+    //   if(thisBooking.NumberOfTablesBooked === 3){
+    //     sliderBackground.style.backgroundColor = 'red';
+    //     beforeSliderBackground.style.backgroundColor = 'red';
+    //   } else if(thisBooking.NumberOfTablesBooked === 2){
+    //     sliderBackground.style.backgroundColor = 'yellow'; 
+    //     beforeSliderBackground.style.backgroundColor = 'yellow';
+    //   } else{
+    //     sliderBackground.style.backgroundColor = 'green'; 
+    //     beforeSliderBackground.style.backgroundColor = 'green';
+    //   }
+    // }
+
+  }
+
 
   bookTable(){
     const thisBooking = this;
