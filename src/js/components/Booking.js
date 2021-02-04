@@ -212,66 +212,123 @@ class Booking {
     }
     
   }
-  // console.log(beforeSliderBackground);
-  // beforeSliderBackground.style.backgroundColor = 'red';
+
+  showColors() {
+    const thisBooking = this;
+    let gradient='';
+    setTimeout(() => {
+      for (let x = 12; x < 24; x = x + 0.5) {
+        let color = 'rgba(63,223,34,1)';
+        const booked = thisBooking.booked[thisBooking.date][x];
+        if (booked&& booked.length < 2) {
+          color = 'rgba(248,253,29,1)';
+        }
+        if (booked && (booked.length > 1)) {
+          color = 'rgba(176,19,19,1)';
+        }
+        const counter = x -12;
+        const start = parseInt(counter * 8.3);
+        const end = parseInt((counter+ 0.5 )*8.3);
+        gradient =  gradient + `${color} ${start}% ${end}%,`;
+        const gradient2 = gradient.substring(0, gradient.length - 1);
+        console.log(gradient2);
+        
+        console.log(gradient);
+        console.log(`linear-gradient(90deg, ${gradient})`);
+        const sliderBackground = document.querySelector('.rangeSlider');
+        const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
+
+        sliderBackground.style.background = `linear-gradient(90deg, ${gradient2})`; 
+        // sliderBackground.style.background = `linear-gradient(90deg, rgba(221,102,43,1) 0% 4%, rgba(221,102,43,1) 4% 8%, rgba(176,19,19,1) 8% 12%, rgba(176,19,19,1) 12% 16%, rgba(221,102,43,1) 16% 20%, rgba(221,102,43,1) 20% 24%, rgba(221,102,43,1) 24% 29%, rgba(221,102,43,1) 29% 33%, rgba(176,19,19,1) 33% 37%, rgba(176,19,19,1) 37% 41%, rgba(221,102,43,1) 41% 45%, rgba(221,102,43,1) 45% 49%, rgba(221,102,43,1) 49% 53%, rgba(221,102,43,1) 53% 58%, rgba(221,102,43,1) 58% 62%, rgba(221,102,43,1) 62% 66%, rgba(63,223,34,1) 66% 70%, rgba(63,223,34,1) 70% 74%, rgba(63,223,34,1) 74% 78%, rgba(63,223,34,1) 78% 83%, rgba(63,223,34,1) 83% 87%, rgba(63,223,34,1) 87% 91%, rgba(63,223,34,1) 91% 95%, rgba(63,223,34,1) 95% 99%)`;
+
+        beforeSliderBackground.style.background = 'transparent';
+
+      }
+    }, 1000);
+    
+  }
+        
+    
+
+
+  // gradient = gradient+ `${color} ${start}%, ${color} ${end}%, `;
+  // var gradient2 = gradient.substring(0, gradient.length - 1);
+  // const css =`background:linear-gradient(90deg,${gradient2} );`;
+  // console.log(css);
+      
+  // const gradient =  `${color} ${start}% ${end}%, `;
+        
+  // console.log(gradient);
+
+
+  // }
+
+  // const sliderBackground = document.querySelector('.rangeSlider');
+  // const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
+
+  // sliderBackground.style.background = `linear-gradient(90deg, ${gradient})`; 
+
+  // beforeSliderBackground.style.background = 'transparent';
+  // const sliderBackground = document.querySelector('.rangeSlider');
+  // const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
+
+  // sliderBackground.style.background = `linear-gradient(90deg, ${gradient})`; 
+
+  // beforeSliderBackground.style.background = 'transparent';
+      
+  // }, 1000);
+    
+  //   const sliderBackground = document.querySelector('.rangeSlider');
+  //   const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
+
+  //   sliderBackground.style.background = `linear-gradient(90deg, ${gradient})`; 
+
+  //   beforeSliderBackground.style.background = 'transparent';
+    
+  // }
+    
+
+  // const sliderBackground = document.querySelector('.rangeSlider');
+  // // const beforeSliderBackground = document.querySelector('.rangeSlider_fill')
+  // // sliderBackground.style.backgroundColor = 'red';
+  // const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
+
+  // sliderBackground.style.background = 'linear-gradient(90deg, green 8.33%, red 8.33% 16.66%, yellow 16.66% 24.99%, green 24.99% 33.32%, red 33.32% 41.65%, green 41.65% 49.98%, yellow 49.98% 58.31%, red 58.31% 64.64%,green 64.64% 74.97%, yellow 74.97% 83.30%, red 83.30% 91.63%, green 91.63%)'; 
+
+  // beforeSliderBackground.style.background = 'transparent';
+
+  // thisBooking.hours = [];
+    
+  // const date = thisBooking.datePicker.value;
+
+  // for(let hourBlock in thisBooking.booked[date]){
+  //   if(thisBooking.booked[date][hourBlock].length === 3){
+  //     thisBooking.hours.push(`${hourBlock}: red`);
+  //   }else if(thisBooking.booked[date][hourBlock].length === 2){
+  //     thisBooking.hours.push(`${hourBlock}: yellow`);
+  //   } else{
+  //     thisBooking.hours.push(`${hourBlock}: green`);
+  //   }
+  // }
+  // console.log(thisBooking.hours);
+
+  // const date = thisBooking.datePicker.value;
+  // const NumberOfTablesBooked = thisBooking.booked;
+  // console.log(NumberOfTablesBooked);
   // for(let hourBlock of thisBooking.booked[date][hourBlock]){
-  //   const NumberOfTablesBooked = thisBooking.booked[date][hourBlock].length;
-  //   console.log(NumberOfTablesBooked);
-  //   if(NumberOfTablesBooked === 3){
+  //   if(thisBooking.NumberOfTablesBooked === 3){
   //     sliderBackground.style.backgroundColor = 'red';
   //     beforeSliderBackground.style.backgroundColor = 'red';
-  //   } else if(NumberOfTablesBooked === 2){
+  //   } else if(thisBooking.NumberOfTablesBooked === 2){
   //     sliderBackground.style.backgroundColor = 'yellow'; 
   //     beforeSliderBackground.style.backgroundColor = 'yellow';
   //   } else{
   //     sliderBackground.style.backgroundColor = 'green'; 
   //     beforeSliderBackground.style.backgroundColor = 'green';
   //   }
+  // }
 
-
-  showColors(){
-    const thisBooking = this;
-    // const sliderBackground = document.querySelector('.rangeSlider');
-    // // const beforeSliderBackground = document.querySelector('.rangeSlider_fill')
-    // // sliderBackground.style.backgroundColor = 'red';
-    // const beforeSliderBackground = document.querySelector('.rangeSlider__fill');
-
-    // sliderBackground.style.background = 'linear-gradient(90deg, green 8.33%, red 8.33% 16.66%, yellow 16.66% 24.99%, green 24.99% 33.32%, red 33.32% 41.65%, green 41.65% 49.98%, yellow 49.98% 58.31%, red 58.31% 64.64%,green 64.64% 74.97%, yellow 74.97% 83.30%, red 83.30% 91.63%, green 91.63%)'; 
-
-    // beforeSliderBackground.style.background = 'transparent';
-
-    thisBooking.hours = [];
-    
-    const date = thisBooking.datePicker.value;
-
-    for(let hourBlock in thisBooking.booked[date]){
-      if(thisBooking.booked[date][hourBlock].length === 3){
-        thisBooking.hours.push(`${hourBlock}: red`);
-      }else if(thisBooking.booked[date][hourBlock].length === 2){
-        thisBooking.hours.push(`${hourBlock}: yellow`);
-      } else{
-        thisBooking.hours.push(`${hourBlock}: green`);
-      }
-    }
-    console.log(thisBooking.hours);
-
-    // const date = thisBooking.datePicker.value;
-    // const NumberOfTablesBooked = thisBooking.booked;
-    // console.log(NumberOfTablesBooked);
-    // for(let hourBlock of thisBooking.booked[date][hourBlock]){
-    //   if(thisBooking.NumberOfTablesBooked === 3){
-    //     sliderBackground.style.backgroundColor = 'red';
-    //     beforeSliderBackground.style.backgroundColor = 'red';
-    //   } else if(thisBooking.NumberOfTablesBooked === 2){
-    //     sliderBackground.style.backgroundColor = 'yellow'; 
-    //     beforeSliderBackground.style.backgroundColor = 'yellow';
-    //   } else{
-    //     sliderBackground.style.backgroundColor = 'green'; 
-    //     beforeSliderBackground.style.backgroundColor = 'green';
-    //   }
-    // }
-
-  }
+  
 
 
   bookTable(){
